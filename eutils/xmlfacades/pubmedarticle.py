@@ -71,6 +71,10 @@ class PubmedArticle(eutils.xmlfacades.base.Base):
     def _medline_citation(self):
         return eutils.xmlfacades.medlinecitation.MedlineCitation(self._xml_root.find('MedlineCitation'))
 
+    @property
+    def nct_ids(self):
+        return self._medline_citation.nct_ids
+
 
 if __name__ == "__main__":
     from eutils.xmlfacades.pubmedarticleset import PubmedArticleSet

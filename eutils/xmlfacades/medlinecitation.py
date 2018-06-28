@@ -64,6 +64,11 @@ class MedlineCitation(eutils.xmlfacades.base.Base):
           or self._xml_root.findtext('Article/Journal/JournalIssue/PubDate/Year') \
           or self._xml_root.findtext('Article/Journal/JournalIssue/PubDate/MedlineDate')
 
+    @property
+    def nct_ids(self):
+        return [x.text for x in self._xml_root.xpath(
+            'Article/DataBankList/DataBank/DataBankName[contains(text(),"ClinicalTrials.gov")]/following-sibling::AccessionNumberList/AccessionNumber')]
+
 
 if __name__ == "__main__":
     import lxml.etree as le
